@@ -23,5 +23,4 @@ class InfoCommands(commands.Cog, name='info_commands'):
         embed.add_field(name='Janus Version', value=f'{core.config.VERSION}', inline=False)
         embed.add_field(name='Description', value=f'{core.config.DESCRIPTION}', inline=False)
         embed.set_footer(text=f"Requested by {ctx.message.author}")
-        await ctx.send(f'{ctx.author.mention}')
         await ctx.send(embed=embed)
