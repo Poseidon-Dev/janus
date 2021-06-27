@@ -17,9 +17,15 @@ class ConversionConn:
         command = 'SELECT * FROM CONVERSIONS'
         return self.execute(command)
 
+    def keys(self):
+        command = 'SELECT DESCRIPTION FROM CONVERSION_NAMES'
+        return self.execute(command)
+
     def conversion(self, dataset):
         command = f"""
-        SELECT (rate * {dataset[0]}), end FROM CONVERSIONS
-        WHERE start = '{dataset[1]}';
+        SELECT (c.rate * {dataset[0]}), c.end FROM CONVERSIONS as c
+        JOIN conversion_names as cn
+        ON cn.ref = c.start
+        WHERE cn.description = '{dataset[1]}';
         """
         return self.execute(command)[0]

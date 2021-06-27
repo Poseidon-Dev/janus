@@ -8,7 +8,7 @@ class ConvertEvents(commands.Cog, name='conversion_events'):
 
     def __init__(self, bot):
       self.bot = bot
-      self.conversions = [val[1] for val in ConversionConn().all()]
+      self.keys = [val[0] for val in ConversionConn().keys()]
        
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -20,7 +20,7 @@ class ConvertEvents(commands.Cog, name='conversion_events'):
                     await message.channel.send(conversions)
 
     def values_to_convert(self, message):
-        if any(val in message.content for val in self.conversions):
+        if any(val in message.content for val in self.keys):
             message_list = message.content.split()
             dataset = re.findall(r'[0-9]+', message.content)
             extracted = list(zip(
