@@ -38,4 +38,9 @@ class ConvertEvents(commands.Cog, name='conversion_events'):
 
     def convert_to_cousin(self, value):
         convert = ConversionConn().conversion(value)
-        return f'{value[0]}{value[1]} = {round(convert[0], 2)}{convert[1]}'
+        new_val = convert[0]
+        if 'x' in new_val:
+            new_val = round(eval(new_val.replace('x', value[0])), 2)
+        else:
+            new_val = round(float(new_val) * float(value[0]), 2)
+        return f'{value[0]}{value[1]} = {new_val}{convert[1]}'

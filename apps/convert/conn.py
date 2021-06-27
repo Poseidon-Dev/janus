@@ -23,7 +23,7 @@ class ConversionConn:
 
     def conversion(self, dataset):
         command = f"""
-        SELECT (c.rate * {dataset[0]}), c.end FROM CONVERSIONS as c
+        SELECT c.rate, c.end FROM CONVERSIONS as c
         JOIN conversion_names as cn
         ON cn.ref = c.start
         WHERE cn.description = '{dataset[1]}';

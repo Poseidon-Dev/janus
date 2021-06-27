@@ -18,6 +18,7 @@ BOT.remove_command('help')
 
 # CURRENT MODULES
 STARTUP_COGS = [
+    'apps.info',
     'apps.convert',
 ]
 
